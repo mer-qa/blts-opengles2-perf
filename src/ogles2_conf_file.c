@@ -286,8 +286,6 @@ static int cnfparser_parse_config(char* start, char* end,
 		(void*)&config->particle_count, VAL_TYPE_INT) < 0) return -1;
 	if(cnfparser_read_val(start, end, "scroll_speed",
 		(void*)&config->scroll_speed, VAL_TYPE_INT) < 0) return -1;
-	if(cnfparser_read_str(start, end, "compositor_cmd",
-		config->compositor_cmd) < 0) return -1;
 	if(cnfparser_read_str(start, end, "convolution_mat", line) < 0) return -1;
 	config->convolution_mat_size = cnfparser_parse_matrix(
 		config->convolution_mat, line);

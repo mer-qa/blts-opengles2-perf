@@ -74,8 +74,3 @@ convolution_mat_divisor: 3
 # 0, 0 ,0, 0, 0"
 
 # --- Common for all tests
-
-# Command to start up compositor (use blts-minimal-compositor -? to find out
-# possible arguments)
-compositor_cmd: "/opt/tests/blts-opengles2-tests/bin/blts-minimal-compositor"
-

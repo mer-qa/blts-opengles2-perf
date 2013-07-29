@@ -53,7 +53,6 @@ USAGE: ./blts-opengles2-tests [-l mylog.txt] [-e test1,test2...] [-en "my test"]
 -w: Used window width. If 0 uses desktop width. (default: 0)
 -h: Used window height. If 0 uses desktop height. (default: 0)
 -d: Used window depth. 16, 24 or 32. If 0 uses desktop depth. (default: 0)
--c: Run the tests with minimal compositor
 
 Execute the tests without window manager. Composite window managers, such as
 Compiz, slow down execution considerably.

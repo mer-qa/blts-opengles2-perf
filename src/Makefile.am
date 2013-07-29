@@ -24,13 +24,11 @@ h_sources = \
 	ogles2_helper.h \
 	test_common.h \
 	test_blitter.h \
-	ogles2_conf_file.h \
-	compositor_runner.h
+	ogles2_conf_file.h
 
 c_sources = \
 	ogles2_helper.c \
 	ogles2_conf_file.c \
-	compositor_runner.c \
 	test_simple_tri.c \
 	test_enum_glextensions.c \
 	test_enum_eglextensions.c \
@@ -46,14 +44,9 @@ library_includedir = $(includedir)/blts
 #library_include_HEADERS = $(h_sources)
 
 bin_PROGRAMS = \
-	blts-opengles2-tests \
-	blts-minimal-compositor
+	blts-opengles2-tests
 
 blts_opengles2_tests_SOURCES = $(h_sources) $(c_sources) ogles2_perf_test.c
 blts_opengles2_tests_CFLAGS = $(AM_CFLAGS) $(BLTS_COMMON_CFLAGS)
 blts_opengles2_tests_LDADD = $(requiredlibs) $(BLTS_COMMON_LIBS)
-
-blts_minimal_compositor_SOURCES = ogles2_helper.c minimal_compositor.c
-blts_minimal_compositor_CFLAGS = $(AM_CFLAGS) $(BLTS_COMMON_CFLAGS)
-blts_minimal_compositor_LDADD = $(requiredlibs) -lXfixes -lXcomposite -lXdamage $(BLTS_COMMON_LIBS)
 
