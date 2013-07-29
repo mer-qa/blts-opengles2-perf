@@ -12,6 +12,8 @@ Running the tests in the package requires
   * libbltscommon >= 0.2.4
   * GLESv2
   * EGL
+  * wayland >= 1.1.0
+  * wayland-egl
 
 Building the package
 

@@ -19,7 +19,7 @@
 #ifndef OGLES2_HELPER_H
 #define OGLES2_HELPER_H
 
-#include <X11/Xlib.h>
+#include <wayland-egl.h>
 #include <GLES2/gl2.h>
 #include <EGL/egl.h>
 #include <blts_log.h>
@@ -97,9 +97,15 @@ typedef struct
 	EGLDisplay egl_display;
 	EGLContext egl_context;
 	EGLSurface egl_surface;
-	Display* x11_display;
-	Window x11_window;
-	Colormap x11_colormap;
+	struct wl_display *wayland_display;
+	struct wl_registry *wayland_registry;
+	struct wl_compositor *wayland_compositor;
+	struct wl_shell *wayland_shell;
+	struct wl_output *wayland_output;
+	int wayland_output_width;
+	int wayland_output_height;
+	struct wl_surface *wayland_surface;
+	struct wl_egl_window *wayland_window;
 
 	GLuint num_textures;
 	glesh_texture textures[GLESH_MAX_TEXTURES];

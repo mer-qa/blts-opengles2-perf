@@ -7,10 +7,8 @@ Group: Development/Testing
 URL: https://github.com/mer-qa/blts-opengles2-perf
 Source0: %{name}-%{version}.tar.gz
 BuildRequires: libbltscommon-devel
-BuildRequires: libX11-devel
-BuildRequires: libXdamage-devel
-BuildRequires: libXcomposite-devel
-BuildRequires: libXext-devel
+BuildRequires: pkgconfig(wayland-client)
+BuildRequires: pkgconfig(wayland-egl)
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(glesv2)
 %define _prefix /opt/tests/%{name}

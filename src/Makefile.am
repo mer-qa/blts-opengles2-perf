@@ -18,7 +18,7 @@ AM_CFLAGS = -O3 -g -Wall -Wextra -std=gnu99 -I$(includedir) -I.. -fPIC
 AM_CPPFLAGS = -pthread
 AM_LDFLAGS = -pthread
 
-requiredlibs = -lm -lrt -lEGL -lGLESv2 -lX11
+requiredlibs = -lm -lrt -lEGL -lGLESv2 -lwayland-client -lwayland-egl
 
 h_sources = \
 	ogles2_helper.h \
