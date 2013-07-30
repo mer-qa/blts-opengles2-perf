@@ -35,7 +35,6 @@ typedef struct
 	int video_widget_generation_freq;
 	int scroll_speed;
 	EGLint* config_attr;
-	char compositor_cmd[PATH_MAX];
 	float convolution_mat[MAX_CONV_MAT_SIZE];
 	int convolution_mat_size;
 	float convolution_mat_divisor;
@@ -48,7 +47,6 @@ typedef struct
 	int h;
 	int d;
 	int flag;
-	int use_compositor;
 	test_configuration_file_params config;
 } test_execution_params;
 

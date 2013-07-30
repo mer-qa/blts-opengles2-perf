@@ -24,7 +24,6 @@
 #include "ogles2_helper.h"
 #include "test_blitter.h"
 #include "test_common.h"
-#include "compositor_runner.h"
 #include "ogles2_conf_file.h"
 
 const char* config_filename = "/opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf";
@@ -39,7 +38,6 @@ static void blts_gles2_help(const char* help_msg_base)
 		"-w: Used window width. If 0 uses desktop width. (default: 0)\n"
 		"-h: Used window height. If 0 uses desktop height. (default: 0)\n"
 		"-d: Used window depth. 16, 24 or 32. If 0 uses desktop depth. (default: 0)\n"
-		"-c: Run the tests with minimal compositor\n"
 		);
 }
 
@@ -73,10 +71,6 @@ static void* blts_gles2_argument_processor(int argc, char **argv)
 			if(++t >= argc) return NULL;
 			params->d = atoi(argv[t]);
 		}
-		else if(strcmp(argv[t], "-c") == 0)
-		{
-			params->use_compositor = 1;
-		}
 		else
 		{
 			return NULL;
@@ -92,12 +86,6 @@ static void blts_gles2_teardown(void *user_ptr)
 {
 	if(user_ptr)
 	{
-		test_execution_params* params = user_ptr;
-		if(params->use_compositor)
-		{
-			stop_compositor();
-		}
-
 		free(user_ptr);
 	}
 }
@@ -111,14 +99,6 @@ static int exec_test(void* user_ptr, int test_num)
 	{
 		BLTS_ERROR("Failed to read configuration file\n");
 		return 1;
-	}
-
-	if(params->use_compositor)
-	{
-		if(start_compositor(params->config.compositor_cmd))
-		{
-			BLTS_ERROR("Failed to start compositor. Running without it.\n");
-		}
 	}
 
 	switch(test_num)
@@ -207,8 +187,6 @@ static int exec_test(void* user_ptr, int test_num)
 		ret = -EINVAL;
 		break;
 	}
-
-	if(params->use_compositor) stop_compositor();
 
 	return ret;
 }
