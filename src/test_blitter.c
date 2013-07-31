@@ -127,7 +127,7 @@ static const char convolution_template[] =
 	"	mediump float blur_size = 1.0 / u_tex_size;\n"
 	"	mediump vec4 sum = vec4(0.0, 0.0, 0.0, 0.0);\n"
 	"%s"
-	"	gl_FragColor = sum / %.2f * u_opacity;\n"
+	"	gl_FragColor = sum / float(%.2f) * u_opacity;\n"
 	"}\n";
 
 static char* frag_shader_convolution;
@@ -468,7 +468,7 @@ static int build_convolution_filter(float* mat, int size, float divisor)
 					sprintf(line,
 						"\tsum += texture2D(s_texture, "
 						"vec2(v_texCoord.x%s, "
-						"v_texCoord.y%s)) * %.2f;\n",
+						"v_texCoord.y%s)) * float(%.2f);\n",
 						x_str, y_str, mat[i]);
 				}
 				strcat(tex2d_sums, line);
