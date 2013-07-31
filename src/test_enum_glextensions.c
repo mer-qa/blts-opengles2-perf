@@ -27,7 +27,6 @@ static const char* gl_ext_list[] =
 	"GL_OES_depth24",
 	"GL_OES_rgb8_rgba8",
 	"GL_OES_texture_float",
-	"GL_OES_mapbuffer",
 	"GL_OES_fragment_precision_high",
 	"GL_OES_EGL_image",
 	NULL
