@@ -22,10 +22,10 @@
 #include "ogles2_helper.h"
 #include "test_common.h"
 
-/* TODO: This list is incomplete. Required extensions are not known yet. */
 static const char* egl_ext_list[] =
 {
-	"texture_from_pixmap",
+	"EGL_WL_bind_wayland_display",
+	"EGL_KHR_image_pixmap",
 	NULL
 };
 
