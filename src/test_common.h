@@ -21,6 +21,8 @@
 
 #include <limits.h>
 
+#include "ogles2_helper.h"
+
 #define MAX_CONV_MAT_SIZE 128
 
 typedef struct
@@ -47,6 +49,7 @@ typedef struct
 	int h;
 	int d;
 	int flag;
+	enum glesh_ws_context_type ws;
 	test_configuration_file_params config;
 } test_execution_params;
 
