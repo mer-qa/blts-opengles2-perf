@@ -25,7 +25,6 @@
 static const char* egl_ext_list[] =
 {
 	"EGL_WL_bind_wayland_display",
-	"EGL_KHR_image_pixmap",
 	NULL
 };
 
