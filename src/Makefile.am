@@ -29,6 +29,7 @@ h_sources = \
 c_sources = \
 	ogles2_helper.c \
 	ogles2_helper_wayland.c \
+	ogles2_helper_fbdev.c \
 	ogles2_conf_file.c \
 	test_simple_tri.c \
 	test_enum_glextensions.c \

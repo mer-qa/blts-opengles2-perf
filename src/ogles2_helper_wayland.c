@@ -160,7 +160,6 @@ wayland_shell_surface_listener = {
 
 
 int glesh_create_context_wayland(glesh_context* context,
-		const EGLint attribList[],
 		int window_width,
 		int window_height,
 		int depth)
@@ -284,3 +283,9 @@ int glesh_main_loop_step_wayland(glesh_context *context)
 	wl_display_dispatch_pending(context->wayland_display);
 	return 1;
 }
+
+struct glesh_ws_context_functions glesh_wayland = {
+	glesh_create_context_wayland,
+	glesh_destroy_context_wayland,
+	glesh_main_loop_step_wayland,
+};

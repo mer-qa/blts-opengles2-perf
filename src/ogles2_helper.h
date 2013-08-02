@@ -205,12 +205,20 @@ double glesh_time_step();
 unsigned char* glesh_generate_pattern(const int width, const int height,
 	const int offset, const GLenum format);
 
-/* Wayland-specific context creation */
-int glesh_create_context_wayland(glesh_context* context,
-	const EGLint attribList[], int window_width, int window_height,
-	int depth);
-int glesh_destroy_context_wayland(glesh_context* context);
-int glesh_main_loop_step_wayland(glesh_context *context);
+/* Context-specific functions */
+enum glesh_ws_context_type {
+	GLESH_WS_CONTEXT_INVALID = 0,
+	GLESH_WS_CONTEXT_WAYLAND,
+	GLESH_WS_CONTEXT_FBDEV,
+};
+void glesh_set_ws_context_type(enum glesh_ws_context_type type);
+
+struct glesh_ws_context_functions {
+	int (*create_context)(glesh_context *context,
+			int window_width, int window_height, int depth);
+	int (*destroy_context)(glesh_context *context);
+	int (*main_loop_step)(glesh_context *context);
+};
 
 #endif // OGLES2_HELPER
 

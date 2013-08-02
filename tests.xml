@@ -18,32 +18,61 @@
 -->
 <testdefinition version="1.0">
   <suite name="blts-opengles2-tests" domain="Graphics">
-    <set name="gles2-smoke" feature="OpenGL ES 2">
+    <set name="gles2-smoke-wayland" feature="OpenGL ES 2 (Wayland)">
       <case name="OpenGL-Enumerate GL extensions"
         description="Lists all GL extensions"
         type="Functional positive">
-        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_GL_extensions.log -en "OpenGL-Enumerate GL extensions"</step>
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_GL_extensions_wayland.log -en "OpenGL-Enumerate GL extensions" -ws wayland</step>
       </case>
       <case name="OpenGL-Enumerate EGL extensions"
         description="Lists all EGL extensions"
         type="Functional positive">
-        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_EGL_extensions.log -en "OpenGL-Enumerate EGL extensions"</step>
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_EGL_extensions_wayland.log -en "OpenGL-Enumerate EGL extensions" -ws wayland</step>
       </case>
       <case name="OpenGL-Enumerate EGL configs"
         description="Lists all EGL configurations"
         type="Functional positive">
-        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_EGL_configs.log -en "OpenGL-Enumerate EGL configs"</step>
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_EGL_configs_wayland.log -en "OpenGL-Enumerate EGL configs" -ws wayland</step>
       </case>
       <case name="OpenGL-Simple triangle"
         description="Draws simple three vertex rotating triangle"
         type="Functional positive">
-        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Simple_triangle.log -en "OpenGL-Simple triangle"</step>
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Simple_triangle_wayland.log -en "OpenGL-Simple triangle" -ws wayland</step>
       </case>
       <get>
-        <file>"/var/log/tests/blts/OpenGL-Enumerate_GL_extensions.log"</file>
-        <file>"/var/log/tests/blts/OpenGL-Enumerate_EGL_extensions.log"</file>
-        <file>"/var/log/tests/blts/OpenGL-Enumerate_EGL_configs.log"</file>
-        <file>"/var/log/tests/blts/OpenGL-Simple_triangle.log"</file>
+        <file>/var/log/tests/blts/OpenGL-Enumerate_GL_extensions_wayland.log</file>
+        <file>/var/log/tests/blts/OpenGL-Enumerate_EGL_extensions_wayland.log</file>
+        <file>/var/log/tests/blts/OpenGL-Enumerate_EGL_configs_wayland.log</file>
+        <file>/var/log/tests/blts/OpenGL-Simple_triangle_wayland.log</file>
+      </get>
+    </set>
+
+    <set name="gles2-smoke-fbdev" feature="OpenGL ES 2 (fbdev)">
+      <case name="OpenGL-Enumerate GL extensions"
+        description="Lists all GL extensions"
+        type="Functional positive">
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_GL_extensions_fbdev.log -en "OpenGL-Enumerate GL extensions" -ws fbdev</step>
+      </case>
+      <case name="OpenGL-Enumerate EGL extensions"
+        description="Lists all EGL extensions"
+        type="Functional positive">
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_EGL_extensions_fbdev.log -en "OpenGL-Enumerate EGL extensions" -ws fbdev</step>
+      </case>
+      <case name="OpenGL-Enumerate EGL configs"
+        description="Lists all EGL configurations"
+        type="Functional positive">
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Enumerate_EGL_configs_fbdev.log -en "OpenGL-Enumerate EGL configs" -ws fbdev</step>
+      </case>
+      <case name="OpenGL-Simple triangle"
+        description="Draws simple three vertex rotating triangle"
+        type="Functional positive">
+        <step>/opt/tests/blts-opengles2-tests/bin/blts-opengles2-tests -C /opt/tests/blts-opengles2-tests/cnf/blts-opengles2-perf.cnf -l /var/log/tests/blts/OpenGL-Simple_triangle_fbdev.log -en "OpenGL-Simple triangle" -ws fbdev</step>
+      </case>
+      <get>
+        <file>/var/log/tests/blts/OpenGL-Enumerate_GL_extensions_fbdev.log</file>
+        <file>/var/log/tests/blts/OpenGL-Enumerate_EGL_extensions_fbdev.log</file>
+        <file>/var/log/tests/blts/OpenGL-Enumerate_EGL_configs_fbdev.log</file>
+        <file>/var/log/tests/blts/OpenGL-Simple_triangle_fbdev.log</file>
       </get>
     </set>
 

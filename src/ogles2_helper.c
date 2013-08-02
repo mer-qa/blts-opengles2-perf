@@ -27,9 +27,44 @@
 
 #include "ogles2_helper.h"
 
+
+/* Window system-specific context functions */
+extern struct glesh_ws_context_functions glesh_wayland;
+extern struct glesh_ws_context_functions glesh_fbdev;
+
+/* Currently active window system */
+static struct glesh_ws_context_functions *ws = NULL;
+
+void glesh_set_ws_context_type(enum glesh_ws_context_type type)
+{
+	const char *name = NULL;
+
+	switch (type)
+	{
+		case GLESH_WS_CONTEXT_WAYLAND:
+			ws = &glesh_wayland;
+			name = "wayland";
+			break;
+		case GLESH_WS_CONTEXT_FBDEV:
+			ws = &glesh_fbdev;
+			name = "fbdev";
+			break;
+		default:
+			ws = NULL;
+			break;
+	}
+
+	if (name)
+	{
+		setenv("EGL_PLATFORM", name, 1);
+	}
+}
+
+
 static const EGLint default_config_attr[] =
 {
 	EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+	EGL_BUFFER_SIZE, 32, /* required for fbdev (see libhybris pull request #111) */
 	EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
 	EGL_NONE
 };
@@ -252,8 +287,12 @@ int glesh_create_context(glesh_context* context,
 
 	generate_cos_sin_tables(context);
 
-	if (!glesh_create_context_wayland(context, attribList,
-				window_width, window_height, depth))
+	if (!ws)
+	{
+		BLTS_ERROR("Unknown window system (ws is NULL)\n");
+	}
+
+	if (!ws->create_context(context, window_width, window_height, depth))
 	{
 		/* glesh_destroy_context() was already called inside */
 		return 0;
@@ -284,6 +323,10 @@ int glesh_create_context(glesh_context* context,
 		return 0;
 	}
 
+	if (!attribList) {
+	    attribList = default_config_attr;
+	}
+
 	if(!eglChooseConfig(context->egl_display, attribList,
 		configs, 20, &num_configs) || !num_configs)
 	{
@@ -300,7 +343,7 @@ int glesh_create_context(glesh_context* context,
 		if(context->egl_surface != EGL_NO_SURFACE)
 		{
 			context->egl_context = eglCreateContext(context->egl_display,
-				configs[t], NULL, contextAttribs);
+				configs[t], EGL_NO_CONTEXT, contextAttribs);
 			if(context->egl_context != EGL_NO_CONTEXT)
 			{
 				break;
@@ -371,7 +414,10 @@ int glesh_destroy_context(glesh_context* context)
 		context->egl_display = NULL;
 	}
 
-	glesh_destroy_context_wayland(context);
+	if (ws)
+	{
+		ws->destroy_context(context);
+	}
 
 	if(context->sin_table)
 	{
@@ -452,7 +498,11 @@ int glesh_execute_main_loop(glesh_context* context,
 				context->perf_data.frames_rendered);
 			return 0;
 		}
-		glesh_main_loop_step_wayland(context);
+
+		if (ws)
+		{
+			ws->main_loop_step(context);
+		}
 		context->perf_data.frames_rendered++;
 
 		if(runtime == 0.0f)
