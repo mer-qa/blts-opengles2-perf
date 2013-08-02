@@ -94,9 +94,14 @@ typedef struct
 	GLint height; /* Render window height in pixels */
 	GLint depth; /* Render window depth in bpp */
 
+	/* EGL-specific state */
 	EGLDisplay egl_display;
 	EGLContext egl_context;
 	EGLSurface egl_surface;
+	EGLNativeWindowType egl_native_window;
+	EGLNativeDisplayType egl_native_display;
+
+	/* Wayland-specific state */
 	struct wl_display *wayland_display;
 	struct wl_registry *wayland_registry;
 	struct wl_compositor *wayland_compositor;
@@ -199,6 +204,13 @@ unsigned char* glesh_read_bitmap(const char* filename,
 double glesh_time_step();
 unsigned char* glesh_generate_pattern(const int width, const int height,
 	const int offset, const GLenum format);
+
+/* Wayland-specific context creation */
+int glesh_create_context_wayland(glesh_context* context,
+	const EGLint attribList[], int window_width, int window_height,
+	int depth);
+int glesh_destroy_context_wayland(glesh_context* context);
+int glesh_main_loop_step_wayland(glesh_context *context);
 
 #endif // OGLES2_HELPER
 
