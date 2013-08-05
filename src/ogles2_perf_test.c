@@ -32,12 +32,13 @@ static void blts_gles2_help(const char* help_msg_base)
 {
 	fprintf(stdout, help_msg_base,
 		"[-t execution_time_in_seconds] [-w window_width] [-h window_height]"
-		"[-d depth] [-c]"
+		"[-d depth] [-c] [-ws wayland|fbdev]"
 		,
 		"-t: Maximum execution time of each test in seconds (default: 10s)\n"
 		"-w: Used window width. If 0 uses desktop width. (default: 0)\n"
 		"-h: Used window height. If 0 uses desktop height. (default: 0)\n"
 		"-d: Used window depth. 16, 24 or 32. If 0 uses desktop depth. (default: 0)\n"
+		"-ws: Used window system. wayland or fbdev. (default: wayland)\n"
 		);
 }
 
@@ -48,6 +49,7 @@ static void* blts_gles2_argument_processor(int argc, char **argv)
 	memset(params, 0, sizeof(test_execution_params));
 
 	params->execution_time = 10;
+	params->ws = GLESH_WS_CONTEXT_WAYLAND;
 
 	for(t = 1; t < argc; t++)
 	{
@@ -71,6 +73,18 @@ static void* blts_gles2_argument_processor(int argc, char **argv)
 			if(++t >= argc) return NULL;
 			params->d = atoi(argv[t]);
 		}
+		else if(strcmp(argv[t], "-ws") == 0)
+		{
+			if(++t >= argc) return NULL;
+
+			if(strcmp(argv[t], "wayland") == 0) {
+				params->ws = GLESH_WS_CONTEXT_WAYLAND;
+			} else if (strcmp(argv[t], "fbdev") == 0) {
+				params->ws = GLESH_WS_CONTEXT_FBDEV;
+			} else {
+				return NULL;
+			}
+		}
 		else
 		{
 			return NULL;
@@ -78,6 +92,7 @@ static void* blts_gles2_argument_processor(int argc, char **argv)
 	}
 
 	blts_cli_set_timeout((params->execution_time + 30) * 1000);
+	glesh_set_ws_context_type(params->ws);
 
 	return params;
 }
