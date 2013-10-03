@@ -11,6 +11,7 @@ BuildRequires: pkgconfig(wayland-client)
 BuildRequires: pkgconfig(wayland-egl)
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(glesv2)
+Requires: mce-tools
 %define _prefix /opt/tests/%{name}
 
 %description
