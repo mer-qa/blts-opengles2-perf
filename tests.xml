@@ -20,7 +20,7 @@
   <suite name="blts-opengles2-tests" domain="Graphics">
     <set name="gles2-smoke-wayland" feature="OpenGL ES 2 (Wayland)">
       <pre_steps>
-        <step>/usr/sbin/mcetool -Don -jenabled</step>
+        <step>/usr/sbin/mcetool -jenabled -Don</step>
       </pre_steps>
       <case name="OpenGL-Enumerate GL extensions"
         description="Lists all GL extensions"
