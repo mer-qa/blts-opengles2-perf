@@ -36,6 +36,8 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 
+AC_DEFINE(MESA_EGL_NO_X11_HEADERS, 1, [define if X11 headers are not available])
+
 # Checks for libraries.
 AC_CHECK_LIB([m], [acosf])
 AC_CHECK_LIB([rt], [clock_gettime])

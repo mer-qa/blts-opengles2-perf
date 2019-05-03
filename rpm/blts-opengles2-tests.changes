@@ -30,11 +30,11 @@
 - Packaging script updated.
 - Logging updated to new common library standard.
 
-* Thu, Sep 30 2010 Kimmo Myllyvirta <kimmo.myllyvirta@digia.com> - 0.0.11
+* Thu Sep 30 2010 Kimmo Myllyvirta <kimmo.myllyvirta@digia.com> - 0.0.11
 - Add RPM packaging
 - Binary and debian package name changed to "blts-opengles2-tests"
 
-* Thu, Sep 09 2010 Kari Laakso <kari.laakso@digia.com> - 0.0.10
+* Thu Sep 09 2010 Kari Laakso <kari.laakso@digia.com> - 0.0.10
 - Initial upload for Meego (changelog summarized)
 - Generic, configurable, convolution filter test.
 - Minimal composite manager (blts_minimal_compositor)
